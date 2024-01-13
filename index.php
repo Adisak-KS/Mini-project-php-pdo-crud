@@ -1,5 +1,5 @@
 <?php
-    require_once 'config/connectdb.php';
+require_once 'config/connectdb.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="userModal">Add User</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -56,7 +56,7 @@
 
 
     <div class="container mt-5">
-        <div class="row">       
+        <div class="row">
             <div class="col-md-6">
                 <h1>CRUD Bootstrap5 </h1>
             </div>
@@ -67,29 +67,75 @@
         <hr>
 
         <!-- แสดง Alert บันทึกสำเร็จ -->
-        <?php if(isset($_SESSION['success'])) { ?>
+        <?php if (isset($_SESSION['success'])) { ?>
             <div class="alert alert-success">
                 <?php
-                    // แสดง Alert บันทึกสำเร็จ
-                    echo $_SESSION['success'];
-                    // เมื่อ Refrash หน้าจอให้ Alert หายไป 
-                    unset($_SESSION['success']);
+                // แสดง Alert บันทึกสำเร็จ
+                echo $_SESSION['success'];
+                // เมื่อ Refrash หน้าจอให้ Alert หายไป 
+                unset($_SESSION['success']);
                 ?>
             </div>
         <?php } ?>
 
         <!-- แสดง Alert บันทึกไม่สำเร็จ -->
-        <?php if(isset($_SESSION['error'])) { ?>
+        <?php if (isset($_SESSION['error'])) { ?>
             <div class="alert alert-danger">
                 <?php
-                    // แสดง Alert บันทึกไม่สำเร็จ
-                    echo $_SESSION['error'];
-                    // เมื่อ Refrash หน้าจอให้ Alert หายไป 
-                    unset($_SESSION['error']);
+                // แสดง Alert บันทึกไม่สำเร็จ
+                echo $_SESSION['error'];
+                // เมื่อ Refrash หน้าจอให้ Alert หายไป 
+                unset($_SESSION['error']);
                 ?>
             </div>
         <?php } ?>
+    
+    <!-- ========== Start Show Users ========== -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Position</th>
+                <th scope="col">Profile</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $stmt = $conn->query("SELECT * FROM users");
+            $stmt->execute();
+            $users = $stmt->fetchAll();
+
+            // ถ้าไม่มีข้อมูล Users
+            if (!$users) {
+                echo "<tr><td colspan='6' class='text-center'>No Users Found</td></tr>";
+            } else {
+                foreach ($users as $user) {
+
+
+            ?>
+                    <tr>
+                        <th scope="row"><?php echo $user['id'] ?></th>
+                        <td><?php echo $user['firstname'] ?></td>
+                        <td><?php echo $user['lastname'] ?></td>
+                        <td><?php echo $user['position'] ?></td>
+                        <td width="100px"><img width="100%" src="uploads/<?php echo $user['profile'] ?>" class="rounded" alt=""></td>
+                        <td>
+                            <a class="btn btn-warning" href="update.php?id=<?php echo $user['id']; ?>">Update</a>
+                            <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+                        </td>
+                <?php }
+            }
+                ?>
+        </tbody>
+    </table>
     </div>
+    <!-- ========== End Show Users ========== -->
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
@@ -101,7 +147,7 @@
         profileInput.onchange = evt => {
             const [file] = profileInput.files;
             // ถ้ามีการเพิ่มรูปเข้ามา
-            if(file){
+            if (file) {
                 // ให้แสดงรูปภาพ
                 previewProfile.src = URL.createObjectURL(file);
             }
