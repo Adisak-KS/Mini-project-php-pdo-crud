@@ -40,7 +40,7 @@ require_once 'config/connectdb.php';
                             <label for="Profile" class="col-form-label">Profile : </label>
                             <input type="file" class="form-control" name="profile" id="profileInput" require>
                             <br>
-                            <img width="100%" id="previewProfile" alt="">
+                            <img width="100%" src="upload/<?php echo $user['profile']; ?>" id="previewProfile" alt="">
                         </div>
 
                         <div class="modal-footer">
@@ -89,48 +89,48 @@ require_once 'config/connectdb.php';
                 ?>
             </div>
         <?php } ?>
-    
-    <!-- ========== Start Show Users ========== -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Position</th>
-                <th scope="col">Profile</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $stmt = $conn->query("SELECT * FROM users");
-            $stmt->execute();
-            $users = $stmt->fetchAll();
 
-            // ถ้าไม่มีข้อมูล Users
-            if (!$users) {
-                echo "<tr><td colspan='6' class='text-center'>No Users Found</td></tr>";
-            } else {
-                foreach ($users as $user) {
+        <!-- ========== Start Show Users ========== -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $stmt = $conn->query("SELECT * FROM users");
+                $stmt->execute();
+                $users = $stmt->fetchAll();
+
+                // ถ้าไม่มีข้อมูล Users
+                if (!$users) {
+                    echo "<tr><td colspan='6' class='text-center'>No Users Found</td></tr>";
+                } else {
+                    foreach ($users as $user) {
 
 
-            ?>
-                    <tr>
-                        <th scope="row"><?php echo $user['id'] ?></th>
-                        <td><?php echo $user['firstname'] ?></td>
-                        <td><?php echo $user['lastname'] ?></td>
-                        <td><?php echo $user['position'] ?></td>
-                        <td width="100px"><img width="100%" src="uploads/<?php echo $user['profile'] ?>" class="rounded" alt=""></td>
-                        <td>
-                            <a class="btn btn-warning" href="update.php?id=<?php echo $user['id']; ?>">Update</a>
-                            <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
-                        </td>
-                <?php }
-            }
                 ?>
-        </tbody>
-    </table>
+                        <tr>
+                            <th scope="row"><?php echo $user['id'] ?></th>
+                            <td><?php echo $user['firstname'] ?></td>
+                            <td><?php echo $user['lastname'] ?></td>
+                            <td><?php echo $user['position'] ?></td>
+                            <td width="100px"><img width="100%" src="uploads/<?php echo $user['profile'] ?>" class="rounded" alt=""></td>
+                            <td>
+                                <a class="btn btn-warning" href="update.php?id=<?php echo $user['id']; ?>">Update</a>
+                                <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+                            </td>
+                    <?php }
+                }
+                    ?>
+            </tbody>
+        </table>
     </div>
     <!-- ========== End Show Users ========== -->
 
