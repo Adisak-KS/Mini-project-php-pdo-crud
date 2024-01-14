@@ -38,19 +38,19 @@ if (isset($_GET['delete'])) {
                     <form action="insert.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">First Name : </label>
-                            <input type="text" class="form-control" name="firstname" require>
+                            <input type="text" class="form-control" name="firstname" required>
                         </div>
                         <div class="mb-3">
                             <label for="lastname" class="col-form-label">Last Name : </label>
-                            <input type="text" class="form-control" name="lastname" require>
+                            <input type="text" class="form-control" name="lastname" required>
                         </div>
                         <div class="mb-3">
                             <label for="position" class="col-form-label">Position : </label>
-                            <input type="text" class="form-control" name="position" require>
+                            <input type="text" class="form-control" name="position" required>
                         </div>
                         <div class="mb-3">
                             <label for="Profile" class="col-form-label">Profile : </label>
-                            <input type="file" class="form-control" name="profile" id="profileInput" require>
+                            <input type="file" class="form-control" name="profile" id="profileInput" required>
                             <br>
                             <img width="100%" id="previewProfile" alt="">
                         </div>
@@ -103,14 +103,8 @@ if (isset($_GET['delete'])) {
         <?php } ?>
 
         <!-- ========== Start Show Users ========== -->
-
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search User">
-            <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
-        </div>
-
-        <table class="table">
-            <thead>
+        <table class="table table-striped table-hover">
+            <thead class="table-light">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Firstname</th>
