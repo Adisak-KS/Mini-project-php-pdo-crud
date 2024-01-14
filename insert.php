@@ -39,14 +39,14 @@
 
                     // หาก Execute เรียบร้อย ไม่มีข้อผิดพลาด
                     if($sql){
-                        $_SESSION["success"] = "Data has been inserted Succesfully";
+                        $_SESSION["success"] = "Data has been inserted Successfully";
                         header("location: index.php");
                     }else{
-                        $_SESSION["error"] = "Data has not been inserted Succesfully";
+                        $_SESSION["error"] = "Data has not been inserted Successfully";
                         header("location: index.php");
                     }
                 }else{
-                    $_SESSION["error"] = "Data has not been inserted Succesfully";
+                    $_SESSION["error"] = "Data has not been inserted Successfully";
                     header("location: index.php");
                 }
             }
