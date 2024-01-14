@@ -27,4 +27,4 @@ ___
 [Github](https://github.com/Adisak-KS)
 ___
 
-✍️ Update : 14/1/2024
+✏️ Update : 14/1/2024
